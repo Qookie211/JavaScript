@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        #caleddar{
+            width: 400px;
+            margin: auto;
+        }
+        button{
+            width: 25%;
+            float: left;
+            height: 40px;
+        }
+        #month{
+            width: 50%;
+            float: left;
+        }
+        .everday{
+            width: 16%;
+            float: left;
+        }
+    </style>
+</head>
+
+<body onload="showDate()">
+<div id="caleddar">
+    <div>
+        <button onclick="lastMonth()">上个月</button>
+        <div id="month"></div>
+        <button onclick="nextMonth()">下个月</button>
+    </div>
+
+    <div>
+        <div class="everday">日</div>
+        <div class="everday">一</div>
+        <div class="everday">二</div>
+        <div class="everday">三</div>
+        <div class="everday">四</div>
+        <div class="everday">五</div>
+        <div class="everday">六</div>
+    </div>
+    <div id="day"></div>
+</div>
+
+<script type="text/javascript">
+    var today = new Date();
+    var year = today.getFullYear();
+    var month = today.getMonth()+1;
+    var day = today.getDate();
+    var allday = 0;
+    function showMonth(){
+        var year_month = year +"年"+month+"月";
+        document.getElementById("month").innerHTML = year_month;
+    }
+    function count(){
+        if(month != 2){
+            if((month == 4)||(month == 6)||(month == 9)||(month == 11))
+            {
+                allday = 30;
+            }
+            else{
+                allday = 31;
+            }
+        }
+        else{
+            if(((year%4)==0 && (year%100)!= 0)||(year%400)==0){
+                allday = 29;
+            }
+            else{
+                allday = 28;
+            }
+        }
+    }
+    function showDate(){
+        showMonth();
+        count();
+        var firstdate = new Date(year,month-1,1);
+        var xiqi  = firstdate.getDay();
+        var daterow = document.getElementById("day");
+        daterow.innerHTML="";
+        if(xiqi!=0){
+            for(var i=0;i<xiqi;i++){
+                var dayElement = document.createElement("div");
+                dayElement.className = "everday";
+                daterow.appendChild(dayElement);
+            }
+        }
+        for(var j=1;j<=allday;j++){
+            var dayElement = document.createElement("div");
+            dayElement.className = "everday";
+            dayElement.innerHTML=j+"";
+            if(j==day){
+                dayElement.style.color="red";
+            }
+            daterow.appendChild(dayElement);
+        }
+    }
+    function lastMonth(){
+        if(month>1){
+            month-=1;
+        }
+        else{
+            month = 12;
+            year -=1;
+        }
+        showDate();
+    }
+    function nextMonth(){
+        if(month<12){
+            month+=1;
+        }else{
+            month = 1;
+            year +=1;
+        }
+        showDate();
+    }
+</script>
+</body>
+
+</html>
