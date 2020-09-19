@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>小游戏：点不到的小窗口</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <button onclick="game.start()">开始游戏</button>
+</body>
+</html>
+<script>
+    /*   窗口大小 和 窗口位置（定位）
+            1. 在打开窗口的时候，就开始设置窗口大小：
+               var opendWindow = window.open("url","name",config)
+               var config="top=?,left=?,width=?,height=?,resizable=yes||no,location=no"
+    *          resizable : 是否可以改变窗口大小（有兼容性问题）
+               location: 是否允许修改地址栏（有兼容性问题）
+            2. 大小：window.innerWidth/Height ：文档显示区的高度
+               文档显示区：仅用于显示页面区域范围大小
+               window.width/height :整个窗口的宽高
+            3. 屏幕大小：
+                screen.height/width:操作系统的桌面分辨率
+                screen.availHeight/Width:桌面去掉任务栏后的宽高
+            4. 移动窗口位置：window.moveTo(left,top)
+                                            x   y
+                                   moveBy(x的增量，y的增量)
+    * */
+    var game={
+        width:50,// 小窗口的宽度
+        height:50,// 小窗口的高度
+        taskH:30,// 任务栏高度
+        maxTop:null,// 最大top值
+        maxLeft:null,//最大left值
+        pop:null, // 游戏中弹出的小窗口
+    //    点击游戏开始按钮的时候，就执行一项任务
+    //    任务的第一步，就要计算小窗口的随机位置的max值
+    //    maxLeft = 屏幕的宽度 - 窗口的宽度
+    //    maxTop = 屏幕的高度 - 窗口的高度 - 任务栏高度
+        start:function(){
+            // console.log(1);
+            // console.log(this);//? 为什么 this指向了 game
+            // 谁调用，this就指向谁！
+            this.maxTop=screen.height-this.height-this.taskH;//?
+            this.maxLeft=screen.width-this.width;//?
+           /* console.log(this.maxTop);
+            console.log(this.maxLeft);*/
+           // 0~max之间随机生成一个初识位置的值
+        //    parseInt(Math.random()*(max-min+1)+min)
+            var rTop=parseInt(Math.random()*(this.maxTop+1));
+            var rLeft=parseInt(Math.random()*(this.maxLeft+1));
+            var config="top="+rTop
+                        +",left="+rLeft
+                        +",width="+this.width
+                        +",height="+this.height
+                        +",resizable=yes,location=no";
+            this.pop=window.open("about:blank","pop",config);
+            this.pop.document.write("<img style='width:80px' src='xiaoxin.gif'>");
+
+        //    当鼠标进入pop窗口的时候
+            this.pop.onmouseover=function(){// this --> pop
+                var e=window.event||arguments[0];
+            //    获得鼠标相对于显示器的X.Y坐标
+                var x=e.screenX;
+                var y=e.screenY;
+            //    重新反复计算随机位置
+            //      只有窗口范围内包含鼠标坐标
+            //      才将窗口移动到新位置
+                while(true){
+                //    在0~maxLeft 之间生成一个随机数，保存在nextX中
+                    var nextX=parseInt(Math.random()*(game.maxLeft+1));
+                //    在0~maxTop 之间生成一个随机数，保存在nextY中
+                    var nextY=parseInt(Math.random()*(game.maxTop+1));
+                //    如果，鼠标的位置不在窗口的新位置范围内
+                    if(!((x>=nextX&&x<=nextX+game.width)
+                        &&(y>=nextY&&y<=nextY+game.height))){
+                        //      就把窗口移动到下一个坐标值位置
+                        this.moveTo(nextX,nextY);
+                        //      退出循环
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+</script>
