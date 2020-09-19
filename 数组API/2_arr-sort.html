@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>数组sort</title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script>
+        /*  6. 数组排序： arr.sort()
+        *     问题：默认的sort方法，只能将所有的元素转为字符串之后再排序（排序规则：unicode号来排序的）
+        *     解决：自定义一个比较规则 2步
+        *     1. 比较规则：比较器函数 - 专门封装任意两数的比较逻辑的函数、
+        *     参数必须是2个 ：a,b
+        *     函数体: a>b  -->   a-b>0  返回的 >0 的数
+        *            a<b   -->   a-b<0  返回的 <0 的数
+        *            a=b   -->   a-b=0  返回0
+        *     升序：function compare(a,b){return a-b}
+        *     降序：function compare(a,b){retunr b-a}
+        *     始终 a是当前，b是下一个 ，参数位置a,b 不能变
+        *
+        *     2. 将比较器函数的*引用*作为参数传递给 sort方法即可
+        *        将一个函数的引用作为参数传递给另一个函数使用 - 这个函数就是一个回调函数！
+        * */
+        var arr=[2,23,11,1,44,4,3];
+        function compareUp(a,b){return a-b}
+        console.log(arr.sort(compareUp));
+        function compareDown(a,b){return b-a}
+        console.log(arr.sort(compareDown));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

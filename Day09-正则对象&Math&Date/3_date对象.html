@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script>
+        /*  Date对象：封装了一个1970元旦到至今的毫秒数
+            1970年1月1日0时0分0秒到当前时间的毫秒差
+            创建方式：4种
+                1. 创建一个日期对象，保存是当前时间
+                    var now=new Date();
+                2. 自定义任意时间
+                    var date=new Date("xxxx/xx/xx[ xx:xx:xx]");
+                3. 自定义任意时间
+                    var date=new Date(xxxx,xx,xx,xx,xx,xx);
+        *               **现实月份-1=计算机中的月份
+                4. var date=new Date(毫秒数);
+                如果要修改时间，都是先将时间对象复制一份
+                var date1=new Date("xxxx/xx/xx");
+                var date2=new Date(date1.getTime());
+                注意：date1.getTime() 返回的是date1的毫秒值
+                原因：所有日期对象的set操作都会修改原日期对象
+                     一旦计算完毕，旧日期被覆盖
+                建议：在计算前，先复制一份副本，对副本做计算操作
+        * */
+        // var now=new Date();
+        // console.log(now);
+        // var birth=new Date("1999/02/11");
+        // console.log(birth);
+        // var mils=now-birth;
+        // console.log(mils);
+        // var days=Math.floor(mils/1000/60/60/24);
+        // console.log("已经活了"+days+"天");
+        // var age=Math.ceil(days/365);
+        // console.log(age);
+
+        /*  Date的API
+            分量：    年        月       日       星期
+                   FullYear    Month    Date     Day
+                     时          分       秒       毫秒
+                   Hours       Minutes   Seconds   Milliseconds
+        *
+            每个分量都有一对get和set方法
+               get用来获取分量的值
+               set    设置分量的值
+            *星期Day分量没有set方法
+        * */
+        var hiredate=new Date("2018/06/15");//入职时间
+        console.log("入职时间为："+hiredate.toLocaleDateString());
+       // 计算合同到期时间
+       // 合同有效期3年，求合同到期时间 +3
+       //  对每个分量做加减：3步 get分量，做加减，set回去
+        var enddate=new Date(hiredate.getTime());
+        var year=enddate.getFullYear();
+        // console.log(year);
+        year+=3;
+        enddate.setFullYear(year);
+        console.log("合同到期时间为："+enddate.toLocaleDateString());
+
+        //合同到期时间提前一个月要续签合同
+        var resdate=new Date(enddate.getTime());
+        resdate.setMonth(resdate.getMonth()-1);
+        console.log("续签合同的时间为："+resdate.toLocaleDateString());
+
+    //    判断周六周日
+        if(resdate.getDay()==6){// -1
+            resdate.setDate(resdate.getDate()-1);
+            console.log("续签时间为："+resdate.toLocaleDateString());
+        }else if(resdate.getDay()==0){ //-2
+            resdate.setDate(resdate.getDate()-2);
+            console.log("续签时间为："+resdate.toLocaleDateString());
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

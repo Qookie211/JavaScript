@@ -1,0 +1,60 @@
+  <!DOCTYPE html>
+    <html>
+    	<head>
+    		<meta charset="UTF-8">
+    		<title>购物车</title>
+    		<link rel="stylesheet" href="2.css" />
+    		<script type="text/javascript" src="2.js" ></script>
+    	</head>
+    	<body>
+    		<center>
+    			<div class="good-list">
+    				<ul id="ul">
+    					<li>
+    						<img  src="img/1.png"/>
+    						<p class="good-name">Huawei/华为P20 Pro</p>
+    						<p class="good-pice">￥4000.00</p>
+    					</li>
+    					<li>
+    						<img  src="img/3.png"/>
+    						<p class="good-name">SMARTISAN/锤子 坚果手机</p>
+    						<p class="good-pice">￥2880.00</p>
+    					</li>
+    					<li>
+    						<img  src="img/2.png"/>
+    						<p class="good-name">Lenovo/联想 拯救者 Y7000 14.0</p>
+    						<p class="good-pice">￥5200.00</p>
+    					</li>
+    					<li>
+    						<img  src="img/4.png"/>
+    						<p class="good-name">Apple/苹果 IPad 2018款</p>
+    						<p class="good-pice">￥2200.00</p>
+    					</li>
+    					<li>
+    						<img  src="img/5.png"/>
+    						<p class="good-name">Xiaomi/小米8 透明探索版</p>
+    						<p class="good-pice">￥3988.00</p>
+    					</li>
+    				</ul>
+    			</div>
+    			<div class="shopping" align="right"><img src="img/timg.png" width="40px"/></div>
+    			<div class="shopping">
+    				<table border=1 bordercolor="#CCC" cellspacing="0" id="tb">
+    					<tr height=45><th width="10%"><input type="checkbox" value="全选"  onclick="allSelect(this.checked),total()" id="isAllSelect"/>&nbsp;全选</th>
+    					<th width="15%">图片</th>
+    					<th width="25%">名称</th>
+    					<th width="15%">单价</th>
+    					<th width="25%">数量</th>
+    					<th>操作</th>
+                        </tr>
+    					<tr>
+    						<td style="border-right: none;"><input type="button" value="删除选择" id="deleteAll" onclick="deletAllSelect()"/></td>
+    						<td style="border-left: none;" colspan="5" align="right">合计：￥<span id="totalSpan">0</span>
+    							<input type="button" id="pay" value="结算(0)"/>
+    						</td>
+    					</tr>
+    				</table>
+    			</div>
+    		</center>
+    	</body>
+    </html>

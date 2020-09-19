@@ -1,0 +1,100 @@
+* {
+    	margin: 0;
+    	padding: 0;
+    	list-style: none;
+    }
+
+    .good-list {
+    	width: 700px;
+    	height: 220px;
+    }
+
+    .good-list li {
+    	float: left;
+    	width: 140px;
+    	height: 160px;
+    }
+
+    .good-list li:hover {
+    	cursor: pointer;
+    }
+    .good-list img {
+    	height: 140px;
+    	width: 140px;
+    }
+
+    .good-list p {
+    	text-align: center;
+    }
+
+    .good-name {
+    	font-size: 14px;
+    }
+
+    .good-pice {
+    	font-size: 12px;
+    	color: red;
+    }
+    .shopping{
+    	width: 700px;
+    }
+    .shopping table{
+    	width: 100%;
+    }
+    /*.shopping input[type="checkbox"]{display: inline-block;}*/
+    .number{
+    	display: inline-block;
+    	font-size: 14px;
+    	width: 35px;
+    	line-height: 120%;
+    	border-left:1px solid #ddccdd;
+    	border-right:1px solid #ddccdd;
+    }
+    .number-bt{
+    	display: inline-block;
+    	font-size: 18px;
+    	border: 0;
+    	width: 20px;
+    	background: none;
+    }
+    .goodNumber{
+    	height: 30px;
+    	border-radius: 4px;
+    	border: 1px solid #ddccdd;
+    }
+    #pay{
+    	width: 60px;
+    	height: 30px;
+    	border: none;
+    	background-color: #FF3333;
+    	border-radius: 20px;
+    	margin: 5px 0 5px 0;
+    }
+    #deleteAll{
+    	width: 60px;
+    	height: 30px;
+    	font-size: 12px;
+    	font-family: "blackadder itc";
+    	background:none;
+    	border: 1px solid #FF3300;
+    	border-radius: 20px;
+    	margin-left:5px ;
+    }
+    #tb{
+    	border-radius:3px ;
+    	background-size: 100%;
+    	background-image: url(img/bgi.jpg);
+    	background-position-y: -70px;
+    }
+    #tb img{
+    	margin-top: 5px;
+    }
+    #tb input[type="checkbox"]{
+    	display: inline-block;
+    	background-color: #FF33000;
+    	border-radius: 100px;
+    	}
+    button{
+    	background: none;
+    	border: none;
+    }

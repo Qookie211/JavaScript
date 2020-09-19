@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>switch case</title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script>
+        /*  switch case 结构：当条件都是**全等（===）**比较，才可使用switch case结构
+
+            语法结构:
+                switch(表达式){// 计算表达式的值
+                    用表达式的结果与每个case 后面的值进行*全等比较*
+                    碰到一个全等的case值后，就会进入case结构，开始执行
+                    如果相等以此触发之后的所有case，进行执行！
+                    case 值1：
+                        满足值1才执行的代码段1;
+                    case 值2：
+                        满足值2才执行的代码段2;
+                    ... .. :
+                        ....................;
+                    default:
+                        当前面的值都不满足时，才执行的默认操作
+                }
+
+                break: "终止"当前结构的执行，并跳出结构。
+                位置：在每个case之间
+                何时可以省略break，上下两个case希望执行相同的操作时
+        *
+        * */
+        /*var a=2;// 数字类型值
+        var b="2";// 字符串类型值
+        // 因为  a和b 做的比较，不仅比较值，还比较数据类型
+        console.log(a===b);// false*/
+
+        /*  模拟电话银行系统操作
+        *       请用户输入一个数字，执行不同的操作：
+        *       如果用户输入数字1: 执行查询服务
+        *       如果用户输入数字2：执行取款服务
+        *       如果用户输入数字3：执行转账服务
+        *       如果用户输入数字0：执行退出手机银行
+        *       否则，提示 按键无效
+        * */
+        var input=parseInt(prompt("请按键"));
+        // console.log(typeof(input));
+        switch(input){
+            case 1:
+                console.log("查询进行中。。");
+                break;
+            case 2:
+                // console.log("取款进行中。。");
+                /*console.log("系统维护中。。");
+                break;*/
+            case 3:
+                // console.log("转账进行中。。");
+                console.log("系统维护中。。");
+                break;
+            case 0:
+                console.log("退出手机银行。。");
+                break;
+            default:
+                console.log("无效按键。。。。");
+        }
+    //    如果系统维护了，怎么修改上面的代码？
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

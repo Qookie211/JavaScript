@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table{width:500px; border-collapse:collapse;
+            text-align:center;
+        }
+        td,th{border:1px solid #ccc}
+    </style>
+    <script>
+            var data=[
+            {"id":1001,"name":'可口可乐',"price":2.5,"count":3000},
+            {"id":1003,"name":'百事可乐',"price":2.5,"count":5000},
+            {"id":1011,"name":'非常可乐',"price":2.3,"count":1000}];
+            window.onload=function () {
+                var table=document.createElement("table");//创建一个table
+                var thead=table.createTHead();//table下创建一个thead
+                var tr=thead.insertRow();//在thead里插入行
+                for (var key in  data[0]){//遍历 属性在当前行
+                    var th=document.createElement("th");
+                    th.innerHTML=key;
+                    tr.appendChild(th);
+                }
+                var th=document.createElement("th");
+                th.innerHTML="operate";
+                tr.appendChild(th);
+                var tbody=table.createTBody();
+                for (var i=0;i<data.length;i++){
+                    var tr=tbody.insertRow();
+                    for (var key in  data[i]){
+                        var td=tr.insertCell();
+                        td.innerHTML=data[i][key];
+                    }
+                    var td=tr.insertCell();
+                    var btn=document.createElement("button");
+                    btn.innerHTML="删除";
+                    td.appendChild(btn);
+                    btn.onclick=function () {
+                        var tr=this.parentNode.parentNode;
+                        var id=tr.cells[0].innerHTML;
+                        console.log(id);
+                            table.deleteRow(tr.rowIndex);
+                    }
+                }
+                document.getElementById("data").appendChild(table);
+                
+
+            }
+
+    </script>
+</head>
+<body>
+<div id="data">
+
+</div>
+
+
+</body>
+</html>

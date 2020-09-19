@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> new document </title>
+    <meta charset="utf-8" />
+    <script>
+        /*  栈和队列：
+                栈：一端封闭，只能从另一端进出的数组
+                何时使用栈：仅从一端进入数组时
+                栈的特点：先进的后出  FILO - first in last out
+                从数组的末尾入栈，其他元素的下标是不会受到影响的
+                末尾入栈的API：arr.push(新值)
+                末尾出栈的API：var last = arr.pop()
+                [1,2,3,4]
+                 0 1 2 3
+
+                从数组的开头入栈：每次入栈，数组下标都要改变
+                [1,2,3] --> [4,1,2,3]
+                 0 1 2       0 1 2 3
+                开头入栈的API：arr.unshift(新值)
+                开头出栈的API：arr.shift数数
+        *
+
+                队列：从一端进入，从另一端出的数组
+                队列的特点：先进的先出  FIFO
+
+                模拟公交车： 从数组的末尾进，从开头出
+                            1. arr.push(值)
+                            2. arr.shift()
+        * */
+        // var arr=[1,2,3];
+        // arr.push(4);
+        // console.log(arr);
+        // var last=arr.pop();
+        // console.log("从数组的末尾弹出的元素是"+last);
+        // console.log(arr);
+        // arr.unshift(4);
+        // console.log(arr);
+        // var first=arr.shift();
+        // console.log("从数组的开头弹出的元素为："+ first);
+        // console.log(arr);
+
+       //模拟公交车- 上下车效果
+        var bus=[];
+        var n=5;
+        var queue=[];
+        for(var i=1;i<6;i++) {
+            for (var n; n > 0; n--) {
+                bus.push("乘客"  +n);
+            }
+        }
+        while(bus.length>0){
+            var customer=bus.shift();
+            console.log(customer+"离开");
+            console.log(bus);
+        }
+
+
+    //    模拟顾客排队抢购
+    //    有5个商品（n），queue为顾客排队等待的队列
+
+    //    1. 此时有6个顾客抢购商品，演示6个乘客排队等待的队列
+    //    2. 演示每个顾客抢购商品成功的输出，并计算输出哪个位顾客抢购成功，商品还剩余多少
+    //    3. 最后输出 哪位 顾客没有抢上商品
+
+        /*  姓名_第几天_xx作业
+        *
+        *  1. 手抄 数组去重案例  2遍  拍照发群里
+        *  2. 总结 数组API中  哪些API 修改原数组对象，哪些不修改
+        *  3. 十进制转二进制  思路 百度 如何十进制转2进制
+        *     请用户输入一个数字，把该数字转成二进制无缝拼接输出
+        *  4. 完成 课堂遗留的案例 模拟顾客排队抢购
+        *
+        *   第二周的笔记 周三下午3点前上交
+        *   今天的作业   周四下午3点前上交
+        *   预习字符串的API
+        * */
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>

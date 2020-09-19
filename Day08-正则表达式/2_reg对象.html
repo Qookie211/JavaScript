@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>reg对象</title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script>
+
+
+<!--       -->
+//        /*获取html中所有a元素中href属性中的url*/
+//        var html=
+//            "<link rel='stylesheet' href='http://index.css'/>"+
+//            "<a name='Top'></a>"+
+//            "<a class='navi' href='http://IOTEK.cn'></a>"+
+//            "<h1 class='title1'></h1>"+
+//            "<a href='http://zhizuobiao.com' target='_blank'></a>"+
+//            "<div></div>";
+
+        var chars=[];
+        for (var a=48;a<58;a++) {
+            chars.push(String.fromCharCode(a));
+        }
+        for (var a=65;a<91;a++){
+            chars.push(String.fromCharCode(a));
+        }
+        for (var a=97;a<123;a++){
+            chars.push(String.fromCharCode(a));
+        }
+        function GetCode() {
+            var code=[];
+            while(code.length!=4){
+                var i=parseInt(Math.random()*chars.length);
+                code.push(chars[i]);
+            }
+            return code.join("-");
+
+        }
+        console.log(GetCode());
+
+    </script>
+</head>
+<body>
+<script>
+
+</script>
+</body>
+</html>

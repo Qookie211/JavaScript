@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>动态操作表格</title>
+    <meta charset="utf-8" />
+    <style>
+        table{width:500px; border-collapse:collapse;
+            text-align:center;
+        }
+        td,th{border:1px solid #ccc}
+    </style>
+    <script>
+        var data=[
+            {"id":1001,"name":'可口可乐',"price":2.5,"count":3000},
+            {"id":1003,"name":'百事可乐',"price":2.5,"count":5000},
+            {"id":1011,"name":'非常可乐',"price":2.3,"count":1000}
+        ];
+        /*  Table对象
+             每种行分组都有一个create方法，都有delete方法（除了tbody没有）
+             插入空行：var tr=table.insertRow(i)
+                      省略i 表示在末尾追加一行
+             删除空行：table.deleteRow(i)
+             注意：删除行，必须知道要删除的下标
+
+             属性：tHead  tFoot
+              **tBodies(多个tbody的元素对象的集合)
+              必须使用[i]方式获得每个tbody
+              rows:获得表格中所有的tr对象
+
+            tbody中
+            方法：var tr=tbody.insertRow(i)
+                         tbody.deleteRow(i)
+            注意：i是相对于tbody中的序号，并不包含thead中的序号
+
+            tr中
+            方法：var td=tr.insertCell(i)  插入td
+                     如果省略i表示末尾追加
+                         tr.deleteCell(i)
+            属性：tr.cells 返回一行中所有的td对象
+                  tr.rowIndex  返回当前行的行下标，专用于删除行操作
+        * */
+    //    页面加载完成后
+        window.onload=function(){
+        //    创建一个table对象
+            var table=document.createElement("table");
+        //    在table中创建tHead
+            var thead=table.createTHead();
+        //  在tHead中插入一行  tr
+            var tr=thead.insertRow();
+            //遍历data中第一个对象的所有属性
+            for(var key in data[0]){
+            //    每遍历一个属性，就创建一个th元素
+                var th=document.createElement("th");
+            //    设置th的内容为当前属性名
+                th.innerHTML=key;
+                tr.appendChild(th);
+            }
+            //增加一个操作列
+            var th=document.createElement("th");
+            th.innerHTML="operate";
+            tr.appendChild(th);
+
+            //在table中创建tbody
+            var tbody=table.createTBody();
+            // 遍历data数组中的所有对象
+            for(var i=0;i<data.length;i++){
+            //    每遍历一个对象，就在tbody下插入一个新tr
+                var tr=tbody.insertRow();
+            //    遍历当前的对象的每个属性
+                for(var key in data[i]){
+                //    每遍历一个属性，就在tr下插入一个新的td
+                    var td=tr.insertCell();
+                //    将当前属性值放入td中
+                    td.innerHTML=data[i][key];
+                }// 内层循环遍历结束后，给每一行 - tr插入一个空的td - 放删除操作按钮的
+                var td=tr.insertCell();
+            //    创建一个删除按钮
+                var btn=document.createElement("button");
+            //    设置btn的内容为删除操作，并将btn追加到td中
+                btn.innerHTML="删除";
+                td.appendChild(btn);
+            //    为button按钮绑定事件处理函数
+                btn.onclick=function(){
+                    // this 指向 当前触发事件的 目标元素对象
+                //    找到当前按钮所在的 *行*
+                    var tr=this.parentNode.parentNode;
+                    // console.log(tr);
+                //    获得当前行第一个单元格中的内容
+                    var id=tr.cells[0].innerHTML;
+                //    用户提示信息 - 是否删除id为XXX的商品
+                    if(confirm("是否删除"+id+"商品？")){
+                    //   confirm  选择框  -点确定 返回true  否则返回false
+                        table.deleteRow(tr.rowIndex);
+                    }
+                }
+            }
+            document.getElementById("data").appendChild(table);
+        }
+    </script>
+</head>
+<body>
+    <div id="data">
+        table>tbody>tr>td
+        <!--
+            1. 在html中通过元素的属性 onXX 绑定的事件处理函数   this 指向？
+        -->
+<!--        <button id="btn1" onclick="fun(this)">测试</button>-->
+
+    </div>
+</body>
+</html>
+<script>
+        /*function fun(btn){
+            console.log(btn);
+        }*/
+</script>

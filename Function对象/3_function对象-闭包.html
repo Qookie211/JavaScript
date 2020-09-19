@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>闭包</title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script>
+        /*  营业厅的取号功能函数
+        *   问题1：全局变量的污染问题
+        * */
+        // var n=0;
+        // function getNum(){
+        //     return ++n;
+        // }
+        // console.log(getNum());
+        // console.log(getNum());
+        // console.log(getNum());
+        // var n=100;//更改了全局变量
+        // console.log(getNum());
+        /*  问题2：局部变量虽然安全（并不是谁都可以访问的），但是每次使用都被初始化（不可重用）
+        *
+        * */
+        // function getNum(){
+        //     var n=0;//局部变量
+        //     return ++n
+        // }
+        // console.log(getNum());
+        // console.log(getNum());
+        // console.log(getNum());
+
+        /*  闭包：全局变量不安全。在哪都可以访问（修改）
+                    局部变量不可重用！
+                    既要重用变量，又要保护变量不被污染 - 闭包
+        *   如何创建闭包：函数嵌套 - 3步
+                1. 先用外层函数封装一个受保护的变量
+                2. 再在内层函数中操作外层函数的变量
+                3. 外层函数将内层函数返回到外部，在外部反复调用
+            闭包的3个特点：
+                1. 函数嵌套
+                2. 内层函数使用外层函数的局部变量
+                3. 内层函数返回到外部，在外部调用
+
+            缺点：占用更多的内存空间 - 因为outer的活动对象无法被释放的
+        * */
+        // function outer(){
+        //     var n=0;
+        //     return function(){
+        //         return ++n;
+        //     }
+        // }
+        // var getNum=outer();// outer()返回的是内层函数的引用！
+        // console.log(getNum());
+        // console.log(getNum());
+        // console.log(getNum());
+        // var n=100;
+        // console.log(getNum());
+        // 如何创建闭包：函数嵌套 - 3步
+        //         1. 先用外层函数封装一个受保护的变量
+        //         2. 再在内层函数中操作外层函数的变量
+        //         3. 外层函数将内层函数返回到外部，在外部反复调用
+        //     闭包的3个特点：
+        //         1. 函数嵌套
+        //         2. 内层函数使用外层函数的局部变量
+        //         3. 内层函数返回到外部，在外部调用
+        function outer(){
+            for(var i=0,arr=[];i<3;i++){
+                arr[i]=function(){return i};//匿名函数function(){return i;} 并沒有执行,这里的i是undefined
+            }
+            //返回的arr中的每个元素是什么？
+            return arr;//数组里存的就是function(){return i;}
+        }
+        console.log(outer());//输出三个function(return i)
+        var getFuns=outer();
+        console.log(getFuns[0]());// for (var i = 0,arr=[];i<3;i++){}执行完了，i=3；
+        console.log(getFuns[1]());
+        console.log(getFuns[2]());
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

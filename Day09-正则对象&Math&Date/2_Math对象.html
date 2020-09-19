@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script>
+        /*   Math对象：专门封装数学计算的常用的常量和计算方法的全局对象
+            ***不能new！所有的API 直接使用 Math.XXX
+            Math的API：
+               1. 取整：上取整，           下取整，              四舍五入
+                       Math.ceil(n)      Math.floor(n)        Math.round(n)
+               2. 乘方、开平方
+                  Math.pow(底数,幂)  比如：Math.pow(2,4) - 2的4次方
+                  Math.sqrt(n)  将n开平方
+               3. 获取最大数，最小数
+                  Math.max(n1,n2,n3,...):给定多个*数字*的最大值
+                  Math.min(n1,n2,n3,...):给定多个*数字*的最小值
+                  max和min默认不支持数组作为参数！
+                  作业：总结call和apply的区别
+             **4. 随机数：Math.random() -->  0<=r<1
+                任意max和min之间的随机整数： 取 40-60之间的随机数
+                parseInt(Math.random()*(max-min+1)+min)
+        */
+        // var n1=3.00001;
+        // console.log(Math.ceil(n1));// 4
+        // var n2=3.999999;
+        // console.log(Math.floor(n2));// 3
+        // var n3=3.5;
+        // console.log(Math.round(n3));
+        // console.log(Math.pow(2,4));
+
+    //    随机生成验证码
+    //    思路：1. 验证码的构成（0-9a-zA-Z）62个备选字符
+    //          2. 把62个备选字符放到一个数组中，通过随机下标取对应的元素值
+    //          3. 取4个即可
+        var chars=[];// 62个备选字符
+    //    从48号开始，到57号结束，顺序生成0-9十个字符
+        for(var c=48;c<=57;c++){
+            chars.push(String.fromCharCode(c));
+        }
+        // console.log(chars);
+    //    从65开始，到90结束，顺序生成A-Z 26个字符
+        for(var c=65;c<91;chars.push(String.fromCharCode(c++)));
+        //从97开始，到122结束，顺序生成a-z 26个字符
+        for(var c=97;c<123;chars.push(String.fromCharCode(c++)));
+        // console.log(chars);
+        function getCode(){// 获得随机的4位字符验证码
+            var code=[];
+        //    反复生成随机数（0-61），直到code中的元素个数为 4 ，不再生成了
+            while(code.length<4){
+            //    随机生成一个下标,保存在i中
+                var i=parseInt(Math.random()*62);
+            //    将chars中i位置的元素压入到code中
+                code.push(chars[i]);
+            }
+        //    返回数组元素拼接成的字符串
+            return code.join("");// xxxx
+        }
+        console.log(getCode());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

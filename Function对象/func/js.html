@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        // var str="今晚小树林w84u";
+        // var arr=[];
+        // var arr1=[];
+        // for(var i=0;i<str.length;i++){
+        //     arr.push(str.charCodeAt(i));
+        // }
+        // console.log(arr);
+        // for(var i=0;i<arr.length;i++){
+        //     arr[i]=arr[i]+100000+"";
+        //     arr1.push(arr[i].slice(1));
+        // }
+        // console.log(arr1);
+        // str=arr1.join("---");
+        // console.log("最终的密语为："+str);
+
+        var emp={
+            work:function () {
+                var sum=0;
+                for (var i=0;i<arguments.length&&arguments[0]>0;i++){
+                    sum+=arguments[i]+arguments.callee(--arguments[i]);
+                }
+                return sum;
+                
+            }
+        }
+        console.log(emp.work(3,2,1));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

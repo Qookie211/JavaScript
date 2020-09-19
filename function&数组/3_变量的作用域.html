@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <script>
+      /*   ****变量的作用域：一个变量可用的范围
+            2种：1.全局作用域：window
+                   放在全局window中的变量
+                   可在程序的任意位置进行访问
+                 2.局部作用域 ：在函数调用时才创建的作用域
+                   局部变量：2种
+                     1. 参数变量
+                     2. 在函数中定义的（var）的变量
+                   ***仅在函数调用时，动态创建
+                   调用时，如果局部有，就不用全局的
+                   调用后，随局部作用域一同销毁
+      *
+      * */
+   /*    var a=2;
+       function fun(b){
+         var a=4;
+         console.log(a);
+         console.log(b);
+       }
+       fun(1);
+       console.log(a);
+
+*/
+       var kl=10;// 10个可口可乐 - 全局变量（在任意位置可以访问）
+       function rose(kl){// rose房间有 5个 百事可乐  -  局部变量
+         kl--;
+         console.log(kl);//
+       }
+       function jack(){
+         kl--;
+         console.log(kl);
+       }
+       console.log(kl);// 10
+       rose(5);// 4
+       console.log(kl);// 10
+       jack(); // 9
+       console.log(kl);// 9
+
+  </script>
+ </head>
+
+ <body>
+  
+ </body>
+</html>

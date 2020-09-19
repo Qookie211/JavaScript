@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>实现购物车客户端计算</title>
+    <meta charset="utf-8" />
+    <style>
+        table{width:600px; text-align:center;
+            border-collapse:collapse;
+        }
+        td,th{border:1px solid black}
+        td[colspan="3"]{text-align:right;}
+    </style>
+</head>
+<body>
+<table id="data">
+    <thead>
+    <tr>
+        <th>商品名称</th>
+        <th>单价</th>
+        <th>数量</th>
+        <th>小计</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td>iPhone6</td>
+        <td>&yen;4488</td>
+        <!--￥-->
+        <td>
+            <button onclick="calc(this)">-</button>
+            <span>1</span>
+            <button onclick="calc(this)">+</button>
+        </td>
+        <td>&yen;4488</td>
+    </tr>
+    <tr>
+        <td>iPhone6 plus</td>
+        <td>&yen;5288</td>
+        <td>
+            <button onclick="calc(this)">-</button>
+            <span>1</span>
+            <button onclick="calc(this)">+</button>
+        </td>
+        <td>&yen;5288</td>
+    </tr>
+    <tr>
+        <td>iPad Air 2</td>
+        <td>&yen;4288</td>
+        <td>
+            <button onclick="calc(this)">-</button>
+            <span>1</span>
+            <button onclick="calc(this)">+</button>
+        </td>
+        <td>&yen;4288</td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="3">Total: </td>
+        <td>&yen;14064</td>
+    </tr>
+    </tfoot>
+</table>
+</body>
+</html>
+<script>
+
+    /*
+    *   按HTML属性查找：
+            var elem=document.getElementById("id值");
+          var elems=parent.getElementsByTagName("标签名");
+              不仅查找直接子元素，且同时查找所有子代元素
+          var elems=parent.getElementsByName("按name属性");
+          *****以上没有兼容性问题*****
+          *****下方API IE8不兼容*****
+          var elems=parent.getElementsByClassName("按class名");
+        ***getElementsxxx，返回HTMLCollection: 动态集合
+              for(var i=0,len=elems.length;i<len;i++)
+    * */
+    function calc(btn){//事件发生时，btn中自动获得点击的按钮
+        /*如果是html中元素onXXX属性绑定的事件处理函数
+        如要获得当前触发事件的元素对象，都要在html中显式用this关键字传入。
+              ***不能再函数中直接用this。
+        因为此时函数内的this相当于window*/
+
+        /*修改数量*/
+        //找到当前按钮btn的父节点，保存在td中
+        var td=btn.parentNode;
+        //在td下找唯一的一个span元素，保存在span中
+        var span=td.getElementsByTagName("span")[0];
+        //取出span的内容转为数字后，保存到变量n
+        var n=parseInt(span.innerHTML);
+        //如果当前按钮的内容是+，则n++
+        if(btn.innerHTML=="+"){n++;}
+        else if(n!=0){n--;}//否则，如果n!=1，才n--
+        //将n写回span的内容
+        span.innerHTML=n;
+
+        /*计算小计：*/
+        //找当前td的父元素tr
+        var tr=td.parentNode;
+        //找tr下所有td，保存在变量tds中
+        var tds=tr.getElementsByTagName("td");
+        console.log(tds);
+        //取出tds中第2个td的内容，从1位置截取剩余字符串，转为小数，保存到变量price中
+        var price=parseFloat(tds[1].innerHTML.slice(1));
+        //计算price*n，保存到变量sub中
+        var sub=price*n;
+        //将"&yen;"+sub.toFixed(2)写回tds中第4个td中
+        tds[3].innerHTML="&yen;"+sub.toFixed(2);
+
+        /*计算总计*/
+        //按id找到table
+        var table=document.getElementById("data");
+        //找到table下的tbody
+        var tbody=table.getElementsByTagName("tbody")[0];
+        //找到tbody下的所有tr，保存在trs中
+        var trs=tbody.getElementsByTagName("tr");
+        // console.log(trs);
+        //遍历trs中每个tr，同时声明变量total=0
+        for(var i=0,total=0,len=trs.length;i<len;i++){
+            total+=parseFloat(trs[i].getElementsByTagName("td")[3].innerHTML.slice(1));
+        }
+        // console.log(total);
+        //    找到当前tr下第4个td
+        //    取出td中的内容，从1位置截取剩余字符，转为小数，累加到total中
+        //(遍历结束后)
+        //找到table下所有td，保存在tds中
+        var tds=table.getElementsByTagName("td");
+        //将"&yen;"+total.toFixed(2)，放入tds中最后一个td中
+        tds[tds.length-1].innerHTML="&yen;"+total.toFixed(2);
+    }
+
+
+    /*var emp={
+        work:function(){
+            var sum=0;
+            for(var i=0;i<arguments.length&&arguments[0]>0;i++){
+                sum+=arguments[i]+arguments.callee(--arguments[i]);
+                //    当遍历第一个参数时
+                //    sum=0+3+（第一次递归的当前参数值2
+                //    sum= 0+2+【第二次递归】 sum = 0+1 *第三次递归*+0 ）
+                //    完整的公式：0+3+0+2+0+1+0 = 6
+            }
+            return sum;
+        }
+    }
+    console.log(emp.work(3,2,1));// 10*/
+</script>

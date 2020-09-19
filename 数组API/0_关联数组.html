@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>关联数组</title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script>
+        /*  关联数组(hash数组-哈希数组)：可以自定义下标名称的数组
+        *
+        *   如何创建关联数组：2种方式
+        *    1. 先创建空数组，再追加自定义下标的元素
+        *    ** 关联数组的length属性失效
+        *    ** 关联数组的key（index）不能重复
+        *    关联数组中保存的就是多个key:value - 键值对儿
+        *                          键   值
+        *    查找起来非常快，和元素的个数无关
+        *
+        *    2. 创建数组的同时初始化元素的内容
+        * */
+
+        /*
+         var arr=["sname","age","salary"];
+         var student=[];
+         student[arr[0]]="clyde";// arr[0] - sname   student["sname"] = "clyde"
+                                                               key       value
+         student[arr[1]]=35;// 无效值
+         student["age"]=40;
+         student[arr[2]]=20000;
+         console.log(student);*/
+
+         /*var student={"sname":"clyde","age":35,"salary":20000};
+         for(var key in student){
+             console.log(key);
+             console.log(student[key]);
+         }
+         console.log(student);*/
+
+        // {sname: "clyde", age: 35, salary: 20000} -- Object
+        // [sname: "clyde", age: 40, salary: 20000] -- Array - Object
+
+        //    数组去重：去掉数组中重复的元素，并统计原数组中每个值的出现次数
+        var arr=[1,13,2,3,2,1,4];
+        //       0  1 2 3 4 5 6
+        var hash=[];
+        //    从0开始，到arr.length结束，遍历arr中每个值
+        for(var i=0;i<arr.length;i++){
+            //    如果hash数组中，不包含当前元素值对应的key
+            //    1. 如何获得arr数组的当前元素值 - arr[i]
+            //    2. 如何把当前元素值作为hash数组中的key存在 - hash[arr[i]]
+            //    3. hash[arr[i]]  -  返回arr[i]的元素值在hash数组中作为key存在的那个元素值
+            if(hash[arr[i]]===undefined){
+                //  则将当前元素值作为key，加入到hash数组中，并值默认为1
+                    hash[arr[i]]=1;
+            }else{
+                //    否则，将hash中的对应的key的值 +1
+                    hash[arr[i]]++;
+            }
+        }
+        // console.log(hash);// 1: 2  2: 2  3: 1  4: 1  13: 1
+    //    如何遍历hash数组： for(var key in hash){ key - 下标   hash[key] - key对应的值value}
+    //    清空arr
+        arr=[];
+    //    依次将hash中的每个key，追加到arr中
+        for(var key in hash){
+            arr[arr.length]=(key-=0);
+        }
+        // for(arr[arr.length] in hash);
+        // 把hash数组中的key保存在arr数组中
+        console.log(arr);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

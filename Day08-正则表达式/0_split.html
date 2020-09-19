@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>split</title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script>
+        /*解析游戏角色 - 字符串
+		Tom@补给兵@60%#Mary@医护兵@80%#John@特种兵@30%
+		   输出例如： 角色名：Tom 职业：补给兵 生命:60%
+	    */
+        var msg="Tom@补给兵@60%#Mary@医护兵@80%#John@特种兵@30%";
+        //第一个规律是  #  返回的  人物数组
+        var person=msg.split("#");
+        console.log(person);
+    //    遍历每个人物，取出每个人物的属性（属性之间按 @ 切割）进行输出
+        for(var i=0;i<person.length;i++){
+            var props=person[i].split("@");
+            // console.log(props);
+            console.log("角色名："+props[0]+" 职业："+props[1]+" 生命："+props[2]);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

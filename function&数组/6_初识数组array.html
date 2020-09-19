@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>数组</title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script>
+        /*
+          索引数组：一组变量的集合，连续保存了多个数据的*引用类型的对象*
+          创建数组的方法：4种
+             1. 创建空数组  var arr=[];
+                  暂时不知道数据内容的时候，先创建再追加
+             2. 创建数组的同时直接初始化数组内容
+                  var 数组名=[值1,值2,值3,....];
+             3. 创建指定个数的数组：
+                   var 数组名=new Array(n);
+                   创建一个新的数组对象，同时初始化了n个空元素
+             4. 创建数组的同时初始化数组内容
+                   var 数组名=new Array(值1,值2,值3,....)
+                注意：3,4方法不常用，因为会产生歧义
+                  var arr=new Array(100);
+                   可以解释为 初识化了100个空元素
+
+           如何获得数组中的元素值 ：变量=数组名[下标];
+           如何赋值 ： 数组名[下标]=新值;
+           如何获取数组的长度（有多少元素）：arr.length属性得到
+           获取数组中最后一个元素的固定写法：arr[arr.length-1]
+
+        * */
+        var arr=[1,2,3,4,5,6,7,8];
+        //       0 1 2 3 4 5 6 7
+        console.log(arr[arr.length-1]);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <script>
+       /*var n=100;
+       var m=n;
+       m++;
+       console.log(n);// 100*/
+
+       /* 按值传递操作：两变量之间进行赋值，或者将变量作为函数的参数传递时，
+                       都仅将变量的值复制了一份给了对方
+       *
+       * */
+
+       function buy(card){
+          card-=10;
+          console.log("余额为："+card);
+       }
+
+       var card=20;// （全局变量card=20）
+       buy(card);// 将card变量传递（是把全局变量card中保存的值20,复制了一份）给了buy方法
+       //           相当于 把20 赋值给了 buy方法的局部变量 card
+       console.log(card);// 20
+  </script>
+ </head>
+
+ <body>
+  
+ </body>
+</html>

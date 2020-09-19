@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>根据页面滚动位置显示浮动框</title>
+    <style>
+        body{height:2000px;}
+        #toTop{
+            position:fixed;
+            bottom:100px;
+            right:0;
+            display:none;
+        }
+    </style>
+    <script>
+        /*  页面的滚动：
+                事件：window.onscroll
+        *       滚动的top距离
+                  document.documentElement.scrollTop||document.body.scrollTop
+                            IE                          其他浏览器
+                  pageXOffset和pageYOffset 属性返回文档在窗口的左上角的水平和垂直方向的滚动的像素值
+                     pageXOffset 设置或返回当前页面相对于窗口显示区左上角的X的位置
+                     pageYOffset 设置或返回当前页面相对于窗口显示区左上角的Y的位置
+                  语法：window.pageXOffset
+                        window.pageYOffset
+        * */
+
+    </script>
+</head>
+<body>
+顶部内容
+<div id="toTop">
+    <a href="#">返回顶部</a>
+</div>
+</body>
+</html>

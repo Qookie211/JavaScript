@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>reg对象</title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script>
+
+        /*  1. ***RegExp对象 ：封装一条正则表达式，提供了使用正则表达式的验证和查找的方法
+               2种创建方式：
+                1. var reg=/正则表达式/ig;
+                   使用固定的正则表达式的时候
+                2. var reg=new RegExp("正则表达式","ig");
+                   注意：正则表达式中所有的\都要写成\\
+                   正则表达式由变量拼接而成或者运行的时候会动态改变，
+                   建议优先使用第二种创建正则表达式的方式
+
+        *    查找-exec：一般都加g
+               var arr=reg.exec(str); 同时获得关键字的内容和位置
+               exec每次只能找下一个匹配的关键词
+               arr[0] - 保存了本次找到的关键词的内容
+               如果找不到，arr返回null
+               arr.index - 保存了本次找到的关键词的首字母位置下标
+
+
+        * */
+        var reg=/no/ig;
+        var str="No zuo no die,no can no bi bi";
+        //       0123456789
+        var arr=null;// 表示arr 将来会指向一个对象，但是此时什么都没指向
+        while((arr=reg.exec(str))!=null){
+            // console.log(arr);
+            console.log("在位置"+arr.index+" ,发现敏感词："+arr[0]);
+        //    reg.lastIndex属性用于规定下次查找的起始位置
+            console.log("下次从"+reg.lastIndex+"开始继续查找");
+        }
+
+
+
+        /*获取html中所有a元素中href属性中的url*/
+        var html=
+            "<link rel='stylesheet' href='http://index.css'/>"+
+            "<a name='Top'></a>"+
+            "<a class='navi' href='http://IOTEK.cn'></a>"+
+            "<h1 class='title1'></h1>"+
+            "<a href='http://zhizuobiao.com' target='_blank'></a>"+
+            "<div></div>";
+    //    上述需求的思路：通过写一个正则表达式，通过正则表达式去进行查找，并返回想要的结果
+    //    贪婪模式
+    //     var reg=/<a\s+.*href=['"]([^'"]*)['"]/ig;
+    //    懒惰模式
+    //     var reg=/<a\s+(.*?)href=['"]([^'"]*)['"]/ig;
+        //              1               2
+
+        /*  贪婪模式：默认情况下，正则表达式都会匹配尽量长的字符串 .*
+            懒惰模式：只匹配最短的符合条件的字符串
+            贪婪如何改为懒惰：.* --> (.*?)
+        *
+        * */
+        /*  注意：^有两种用法
+                 [^'"] 如果^出现在[]中的字符集中，表示 非（否定）
+        *        ^不能与其他的字符连用
+                 表示 除了 ' " 以外的其他字符
+
+            如何获得本次查找的结果中的部分内容：2步
+            1. 在正则表达式中用(),包裹住需要的部分内容
+            2. 在本次查找的同时，使用RegExp.$n,获得第n个()中匹配的子内容
+                                   RegExp.$1
+        * */
+        var urls=[];// 保存找到的所有url
+        var arr=[];// 临时保存每次exec查询的结果
+        //反复调用reg.exec 将查找的结果保存在arr中，直到==null为止
+        while((arr=reg.exec(html))!=null){
+            // console.log(arr);
+        //  将本次查找的结果的子内容压入到 urls中
+            urls.push(RegExp.$2);
+            // console.log(urls);
+        }
+        //退出循环输出 数组中的内容
+        console.log(urls.join("\n"));
+    </script>
+</head>
+<body>
+<script>
+
+</script>
+</body>
+</html>

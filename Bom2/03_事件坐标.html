@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <style>
+        body{
+            height:1000px;
+            margin:0px;
+            padding:0px;
+            /*background-color: blueviolet;*/
+        }
+        #outer{
+            width:400px;
+            height:400px;
+            border:1px solid red;
+        }
+        #inner{
+            width:100px;
+            height:100px;
+            border:1px solid blue;
+        }
+    </style>
+    <script>
+        /*  window.event代表事件对象的状态
+           只有在事件发生时，生效，如：鼠标，键盘等事件被触发的时候这个对象才存在
+             var e=window.event||arguments[0]
+                         ie         其他浏览器
+
+           事件的坐标：3种：
+          1. 相对于显示器左上角（屏幕）
+             最大值screen.availWidth/Height
+             鼠标的位置：e.screenX/Y
+           2. 相对于文档显示区域左上角（body）
+              最大值：window.innerWidth/Height
+              鼠标的位置：e.clientX/Y
+          3. 相对于父元素左上角(div)
+              最大值：父元素的宽和高
+              鼠标位置：e.offsetX/offsetY
+        * */
+        function coordinates(e){
+            var x=e.offsetX;
+            var y=e.offsetY;
+            document.getElementById("inner").innerHTML="x:"+x+"y:"+y;
+
+        }
+    </script>
+</head>
+<body  onmousemove="coordinates(event)">
+    <div id="outer">
+        <div id="inner"></div>
+    </div>
+</body>
+</html>

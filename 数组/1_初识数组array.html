@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>数组</title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script>
+        /*
+        *   索引数组：一组变量的集合，连续保存了多个数据的*引用类型的对象*
+        *   创建数组的方法：4种
+              **1. 创建空数组  var arr=[];
+        *          暂时不知道数据内容的时候，先创建再追加
+        *     **2. 创建数组的同时直接初始化数组内容
+        *           var 数组名=[值1,值2,值3,....];
+        *       3. 创建指定个数的数组：
+        *           var 数组名=new Array(n);
+        *           创建一个新的数组对象，同时初始化了n个空元素
+        *       4. 创建数组的同时初始化数组内容
+        *           var 数组名=new Array(值1,值2,值3,....)
+        *        注意：3,4方法不常用，因为会产生歧义
+        *           var arr=new Array(7);
+        *           可以解释为 初识化了 7个空元素
+        *
+        *   如何获得数组中的元素值 ：变量=数组名[下标];
+           如何赋值 ： 数组名[下标]=新值;
+           如何获取数组的长度（有多少元素）：arr.length属性得到
+           获取数组中最后一个元素的固定写法：arr[arr.length-1]
+
+           1. 什么对象？
+              js中的对象，指内存中集中保存了一组相关数据和功能的整体
+              对象都可以通过new操作符来创建
+              new专门用于在内存中开皮皮一个空间，来保存数据和功能。返回*存储空间地址*
+           2. 数组是个对象。数组名作为一个变量或者参数传递的时候，都是将地址复制了一份给对方
+              后果：如果对方修改了数组内容，则原数组也会被改变！
+
+           3. null: null表示一个变量不再指向任何对象的地址！
+              null和undefined的区别？
+               都是原始数据类型，保存在栈中的变量
+               不同点：undefined表示变量声明过，但没有赋值，是所有未赋值的变量的默认值
+                      null表示一个变量 将来可能指向一个对象，但是目前来说什么都没有指向！
+
+              var student=null;// student变量将来是保存学生数据的一个对象，但是现在还没有地址保存
+              垃圾回收器：伴随着主程序存在，每个对象当前的引用次数为0，垃圾回收器自动的释放内存空间
+              强烈建议：在使用完一个大的对象后，主动的赋值为null是一个好习惯
+        * */
+        /*var arr=[1,2,3,4];
+        var arr1=["魏子森","邵雪纯","王旭"];
+        var arr2=["雷环宁","陈晨曦"];
+        //       0 1 2 3
+        console.log(arr[arr.length-1]);
+
+        // 这个函数实现什么功能？ - 获得数组中最后一个元素值的功能函数
+        function fun(arr){
+            return arr[arr.length-1];
+        }
+
+        console.log(fun(arr));// 4
+        console.log(fun(arr1)); // 王旭
+        console.log(fun(arr2));// 陈晨曦*/
+
+        var n=2;
+        var m=n;
+        m++;
+        console.log(n);
+        var arr=[2,3,4];
+        var arr1=arr;
+        arr1[1]=4;
+        console.log(arr[1]);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

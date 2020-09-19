@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>打开新链接方式总结</title>
+    <script>
+        /*  1. 在新窗口打开，可后退
+        *
+        * */
+        function openUrl1(){
+            // window.open("http://www.zhizuobiao.com","_self");
+            open("http://www.zhizuobiao.com","_self");
+        //    target _self 在自身窗口打开链接
+        }
+        function openUrl2(){
+            /*  Bom
+                location:当前窗口正在打开的url对象（地址栏）
+            * */
+            location.replace("http://www.zhizuobiao.com");
+        }
+        function openUrl3(){
+            open("http://www.baidu.com","_blank");
+        }
+        function openUrl4(){
+
+            open("http://www.baidu.com","baidu");
+        }
+    </script>
+</head>
+<body>
+<a href="javascript:openUrl1()">在当前窗口打开，可后退</a><br>
+<a href="javascript:openUrl2()">在当前窗口打开，不可后退</a><br>
+<a href="javascript:openUrl3()">在新窗口打开，可打开多个</a><br>
+<a href="javascript:openUrl4()">在新窗口打开，不可打开多个</a><br>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>循环-while</title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script>
+        /*  循环：让程序反复执行同一段代码
+            循环三要素： 1. 循环条件：让循环继续执行的条件
+                        2. 循环变量：循环条件中用来比较的变量
+                           循环变量总是向不满足循环条件的趋势不断变化的
+                        3. 循环体：循环内，反复执行的代码段
+            1. while循环：先判断循环条件，再执行循环体
+                循环条件的变化*没有规律*时，优先使用while循环
+                var 循环变量=初始值;
+                while(循环条件){
+                    循环体;
+                    迭代的修改循环变量;
+                }
+            2. do  while ：先执行循环体，再判断循环条件
+               即使不满足循环条件，也希望执行一次
+               do{
+                    循环体;
+                    迭代修改循环变量
+               }while(循环条件)
+
+               while  VS  do while：
+               主要就是看第一个条件满足不满足
+               如果满足，两者等效
+               如果不满足，while循环一次也不执行，do while 至少执行一次
+        *
+        * */
+        // 转3圈  - 1. round (循环变量) = 0
+        //  2. 循环条件 round<3
+        //  3. 循环体 - 每转一圈，就输出一次
+        var round=3;
+       /* while(round<3){
+            round++;
+            console.log("转了"+round+"圈");
+        }*/
+        var round=10;
+        do{
+            round++;
+            console.log("转了"+round+"圈");
+        }while(round<3);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

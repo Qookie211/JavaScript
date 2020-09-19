@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>动态创建表格</title>
+    <meta charset="utf-8" />
+    <style>
+        table{
+            width:1000px;
+            border-collapse:collapse;
+            text-align:center;
+            margin: 100px auto;
+        }
+        td,th{border:1px solid #ccc}
+    </style>
+    <script>
+        /*   1. 创建单个节点 3步
+                1. 创建一个空节点对象
+                var elem=document.createElement("标签名");
+                比如：var a=document.createElement("a");
+                     <a></a>
+                2. 设置关键的属性（可选）
+                比如：a.href="http://www.zhizuobiao.com"
+                     a.innerHTML="go to zhizuobiao"
+                3. 将新节点挂到指定的父元素下面 ：3种
+                    1. 追加：parent.appendChild(elem);
+                    2. 插入：parent.insertBefore(elem,oldElem)
+                    3. 替换：parent.replaceChild(elem,oldElem)
+        *
+        * */
+        // 假定从服务器拿到了json数据 - 字符串数据
+        // 作业1：总结什么json数据，以及json数据有哪些方法属性
+        var json='[{"ename":"Tom","salary":5000,"age":25},'+
+                  '{"ename":"Marry","salary":6000,"age":31},'+
+                  '{"ename":"John","salary":3000,"age":21}]';
+        console.log(json);
+        //如何将json字符串转为内存中的对象
+        //eval(string) 函数计算某个字符串，并执行其中的JavaScript代码
+        var student=eval(json);
+        window.onload=function(){
+        //    创建空的table元素对象
+            var table=document.createElement("table");
+        //    创建空的thead，放入到table中
+            var thead=document.createElement("thead");
+            table.appendChild(thead);
+        //    创建空的tr，放入到thead中
+            var tr=document.createElement("tr");
+            thead.appendChild(tr);
+        //    for(var key in ..) 遍历第一个对象中的所有属性即可
+            for(var key in student[0]){
+            //    每遍历一个对象的属性，就创建一个空的th
+                var th=document.createElement("th");
+            //    将当前属性名放入th中
+                th.innerHTML=key;
+            //    将th追加到tr中
+                tr.appendChild(th);
+            }
+
+        //    创建空的tbody元素，加入到table中
+            var tbody=document.createElement("tbody");
+            table.appendChild(tbody);
+        //    遍历student中每个员工对象
+            for(var i=0;i<student.length;i++){
+            //    每遍历一个员工，就创建一个空的tr，并加入到tbody中
+                var tr=document.createElement("tr");
+                tbody.appendChild(tr);
+            //    遍历当前员工对象的每个属性
+                for(var key in student[i]){
+                //    每遍历一个属性，就创建一个td加入到tr中
+                    var td=document.createElement("td");
+                //    将当前的员工的属性值放入到td中
+                    td.innerHTML=student[i][key];
+                    tr.appendChild(td);
+                }
+            }
+        //    将table挂到div中
+            document.getElementById("data").appendChild(table);
+        }
+    </script>
+</head>
+<body>
+    <div id="data">
+
+    </div>
+</body>
+</html>

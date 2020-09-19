@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>读取并修改元素的内容</title>
+    <meta charset="utf-8" />
+    <style>
+        select{width:100px;height:85px;}
+        div{display:inline-block;width:50px}
+    </style>
+    <script src=""></script>
+</head>
+<body>
+<!--假设两个select元素，分别保存备选地区列表和选中地区列表
+实现两选择框之间选项的交换：
+包括：当个选中项左右移动
+          多个选中项左右移动
+          全左移和全右移
+要求：两个select中的地区都要按照名称首字母排序
+-->
+    <select id="unsel" size="5" multiple>
+        <option>Argentina</option>
+        <option>Brazil</option>
+        <option>Canada</option>
+        <option>Chile</option>
+        <option>China</option>
+        <option>Cuba</option>
+        <option>Denmark</option>
+        <option>Egypt</option>
+        <option>France</option>
+        <option>Greece</option>
+        <option>Spain</option>
+    </select>
+    <div>
+        <button onclick="move(this)">&gt;&gt;</button>
+        <button onclick="move(this)">&gt;</button>
+        <button onclick="move(this)">&lt;</button>
+        <button onclick="move(this)">&lt;&lt;</button>
+    </div>
+    <select id="sel" size="5" multiple>
+    </select>
+</body>
+</html>
+<script>
+    // window.onload --> 页面加载完成之后的操作
+    window.onload=function(){
+        // console.log(1)
+        // 注意：如果一句代码是以 () , [] , ` 开头，那么上一句代码必须要有;表示结束上一句语句
+        // 否则就会报错！
+        (function(){
+            //    找到id为unsel的select元素，保存在unsel中
+            var unsel=document.getElementById("unsel");
+            unselArr=unsel.innerHTML
+            //    将unsel的innerHTML，替换开始位置的内容为""
+                .replace(/^\s*<option>/,"")
+                //    将unsel的innerHTML，替换结束位置的内容为""
+                .replace(/<\/option>\s*$/,"")
+                //    使用split按照规律切割成国家数组
+                .split(/<\/option>\s*<option>/);
+        })();
+        console.log(unselArr);
+    }
+    var unselArr=[];
+    var selArr=[];
+    function  move(btn){
+        switch(btn.innerHTML){
+            case "&gt;&gt;":
+                selArr=selArr.concat(unselArr);
+                unselArr=[];
+                break;
+            case "&lt;&lt;":
+                unselArr=unselArr.concat(selArr);
+                selArr=[];
+                break;
+            case "&gt;":
+                //1. 先拿到左边的下拉列表里的所有选项
+                var opts=document.querySelectorAll("#unsel>option");
+        //        如果遍历中的操作会减少数组的个数，就会影响后续的下标
+        //        但并不影响前面的元素的下标 - 应该从后往前遍历！
+                for(var i=opts.length-1;i>=0;i--){
+                    if(opts[i].selected){
+                        // 把左边下拉列表里的被选中项数据，从左边删除，并push到右边的下拉列表数据中
+                        selArr.push(unselArr.splice(i,1)[0]);
+                    }
+                }
+                break;
+            case "&lt;":
+                var opts=document.querySelectorAll("#sel>option");
+                for(var i=opts.length-1;i>=0;i--){
+                    if(opts[i].selected){
+                        unselArr.push(selArr.splice(i,1)[0]);
+                    }
+                }
+                break;
+        }
+        //为了使移动后的数据按照unicode号的顺序排列，所以要先排序，再渲染
+        unselArr.sort();
+        selArr.sort();
+        //show方法是专门用来渲染数据的方法
+        show();
+    }
+    function show(){// 将每次移动后的两个数组join成html字符串，再放回对应的sel元素中
+        var unsel=document.getElementById("unsel");
+        if(unselArr.length==0){
+            unsel.innerHTML="";
+        }else{
+            unsel.innerHTML="<option>"
+                            +unselArr.join("</option><option>")
+                            +"</option>";
+        }
+        var sel=document.getElementById("sel");
+        if(selArr.length==0){
+            sel.innerHTML="";
+        }else{
+            sel.innerHTML="<option>"
+                +selArr.join("</option><option>")
+                +"</option>";
+        }
+    }
+</script>

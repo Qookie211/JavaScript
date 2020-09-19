@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script>
+        /*  数组的API：API - 应用程序接口
+            浏览器的厂商已经实现的方法，开发人员直接调用即可！
+        *   1. 数组的字符串拼接  arr.join("连接符");
+                1. 将字符数组，无缝拼成成单词
+                2. 将单词数组，拼接为句子
+                3. 将数组转换为页面上的列表/选择元素
+
+            2. 连接数组 concat
+               var newArray=arr.concat("值1","值2",[值3，值4]...);
+
+            3. 获取子数组 ***slice
+               var subArr=arr.slice(starti[,endi]) ;
+               starti - 开始的位置下标
+               endi   - 结束的位置下标
+               截取的规则：含头不含尾
+               如果省略endi 表示从starti起始下标开始截取到结尾
+               slice支持倒数下标
+
+               注意：上述的API 都是不修改原数组对象，返回新数组对象！
+
+            4. splice - 删除、插入、替换任意位置的任意个元素 - 直接修改原数组对象
+                删除：2参数 ：要删除的第一项的位置下标，要删除的项数
+                    splice(starti,n)
+                插入：起始位置下标，0（要删除的个数），和要插入的项
+                    splice(starti,0,新值1，新值2，...)
+                替换：3个指定参数：起始位置，要删除的个数和要插入的任意数量项
+                    splice(starti,n,新值1，新值2，....)
+                注意：splice()方法始终返回的一个数组，该数组中包含了从原数组中删除的项！
+
+
+            5. reverse() - 反转数组 - 修改原数组对象
+
+
+        * */
+        // var student=["aaa","bbb","ccc"];
+        // console.log(student.join("--"));
+        // var chars=["I","a","m","g","d"];
+        // var word=chars.join("===    ");
+        // console.log(word);
+
+    //    需求：根据给定的数组内容，实现页面中的下拉列表效果
+    //     var city=["No1","No2","No3"];
+    //     var html="<select><option>"+city.join("</option><option>")+"</option></select>";
+    //     console.log(html);
+    //     document.write(html);
+
+        // var arr1=[1,2,3];
+        // var arr2=[7,8,9];
+        // var arr3=arr1.concat(4,5,6,arr2);
+        // console.log(arr3);
+
+        // var pid=["1","1","0","1","0","2","1","9","8","6","0","8","2","6","1","1","2","7"];
+        // var birth=pid.slice(6,14);//截取
+        // console.log(birth.join(""));
+        // var subArr=pid.slice(-4);// 倒数第n位就取 -n
+        // console.log(subArr);
+        // console.log(pid);//不改变原数组
+
+        //splice操作
+        var pid=["1","1","0","1","0","2","1","9","8","6","0","8","2","6","1","1","2","7"];
+        var subArr=pid.splice(6,8);
+        console.log(subArr);// 使用splice删除的项返回什么？ - 返回的是删除项组成的数组！
+        console.log(pid);   // 原数组对象是否被改变  -  是的！
+        pid.splice(6,0,"1","9","8","6","0","8","2","6");
+        console.log(pid);
+        pid.splice(6,8,"2","0","0","0","0","1","0","1");
+        console.log(pid);
+        pid.reverse();
+        console.log(pid);
+        //改变原数组
+
+
+    </script>
+</head>
+<body>
+    <!--<select>
+        <option>北京</option><option>上海</option><option>天津</option>
+    </select>-->
+</body>
+</html>

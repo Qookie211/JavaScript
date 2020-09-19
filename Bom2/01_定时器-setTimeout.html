@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>倒计时自动关闭/跳转页面</title>
+    <meta charset="utf-8" />
+    <script>
+        /*  定时器如何使用？3步
+                1. 定义任务函数
+                2. 启动定时器
+                3. 停止定时器
+        *
+            一次性定时器：让浏览器先等待一定的时间后，再自动的执行*一次*任务
+            setInterval  --》 setTimeout
+            执行完毕后，自动的退出
+        * */
+        //实现一个倒计时的功能函数  calc
+        function calc(){
+        //    找到id为msg的span
+            var span=document.getElementById("msg");
+        //    将span中的数字部分，转为整数，保存n中
+            var n=parseInt(span.innerHTML);
+        //    将n先递减1，再比较
+            if(--n>0){// 如果n>0
+            //    将n拼接span中剩余部分文本，放回到span中
+                span.innerHTML=n+"秒钟后自动关闭";
+            //    同时启动一次性定时执行操作，设置时间间隔为1000ms
+                timer=setTimeout(calc,1000);
+            }else{// 否则，关闭当前窗口
+                close();// 关闭当前窗口
+            }
+        }
+        var timer=null;
+        window.onload=function(){
+            timer=setTimeout(calc,1000);
+        }
+    </script>
+</head>
+<body>
+    <span id="msg">5秒钟后自动关闭</span><br>
+    <a href="javascript:clearTimeout(timer)">留在本页</a>
+</body>
+</html>

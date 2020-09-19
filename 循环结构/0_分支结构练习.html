@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <script>
+      /*  根据用户输入的 年,月,日,来判断这一天是这一年里的第几天？
+      * */
+      var y=parseInt(prompt("输入年份"));
+      var m=parseInt(prompt("输入月份"));
+      var d=parseInt(prompt("输入日期"));
+      var days=0;
+  //    比如：2019 年 10 月 28 日
+  //    前9个月的天数+28
+  //    有31 天  有30天  28天  判断这一年是否为闰年 如果闰年  28--》29
+      var m1=m3=m5=m7=m8=m10=m12=31;
+  //    赋值运算：都是等号右边的值赋值给=号左边的变量
+      var m4=m6=m9=m11=30;
+      var m2=(y%4==0&&y%100!=0)||(y%400==0)?29:28;
+      // console.log(m2);
+      m>11&&(days+=m11);
+      m>10&&(days+=m10);
+      m>9&&(days+=m9);
+      m>8&&(days+=m8);
+      m>7&&(days+=m7);
+      m>6&&(days+=m6);
+      m>5&&(days+=m5);
+      m>4&&(days+=m4);
+      m>3&&(days+=m3);
+      m>2&&(days+=m2);
+      m>1&&(days+=m1);
+      days+=d;
+      console.log("这一天是这一年里的第"+days+"天");
+  </script>
+ </head>
+
+ <body>
+  
+ </body>
+</html>

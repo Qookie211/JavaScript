@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> new document </title>
+    <meta charset="utf-8" />
+    <script>
+
+        /*  作业1：将str转为unicode号 加密
+        *   var str="今晚小树林w84u";
+        *   当转的unicode号不足5位时，通过添加 "0" 补齐5位进行字符串拼接输出
+        *   今  - 20123  w - 112 -->00112
+        *   输出结果：20123  00112 00034
+
+        *   作业2：把下面的内容，字母的首字母转为大写 进行输出
+        *   var str="no zuo no die";
+        *   结果：No Zuo No Die
+        * */
+
+        /*var str="今晚小树林w84u";
+        //       0 1 2 3 45678
+        var arr=[];// 把字符转为unicode后，保存在arr中
+        var arr_5=[];// 保存转为5位密语后的数组
+        for(var i=0;i<str.length;i++){
+            // 把当前字符转为unicode，并压入arr数组中
+            arr.push(str.charCodeAt(i));
+        }
+        console.log(arr);
+    //    每一个字符的unicode号  +  100000
+        for(var i=0;i<arr.length;i++){
+        //  为了补足5位 需要+100000 同时为了使用slice 就需要转为 字符串类型
+            arr[i]=arr[i]+100000+"";
+        //    把修改后的元素值，压入到arr_5数组中
+        //     arr_5.push(arr[i]);
+            arr_5.push(arr[i].slice(1));
+        }
+        console.log(arr_5);
+        str=arr_5.join("");
+        console.log("最终的密语为："+str);*/
+
+
+
+        /*var str="no zuo no die";
+    //    1. 先取出每个单词 - 按照空格进行切割（split）返回数组
+        var words=str.split(" ");
+        console.log(words);
+    //    2. 遍历数组，取出每个单词，进行首字母的操作
+        for(var i=0;i<words.length;i++){
+        //    将每个单词的首字母先变为大写，再拼接上剩余字符
+        //    字符串是一个类数组对象，可以通过下标访问某一个字符
+            words[i]=words[i][0].toUpperCase()+words[i].slice(1);
+        }
+        console.log(words);
+    //    3. 怎么切的怎么拼回去
+        str=words.join(" ");
+        console.log(str);*/
+
+
+
+    //  练习：将下面的内容，进行解密
+        var str="201702620223567266412651900119000560005200117";
+        var reg=/\d{5}/g;
+    //    match 方法查找全部匹配（符合reg）的关键词，压入到数组中
+        var arr=str.match(reg);
+        console.log(arr);
+    //    遍历数组
+    //    1. 先把素组中的每个元素转为数字
+    //    2. String.fromCharCode(n) --> 转为字符
+    //    3. 把转化后的字符进行拼接（累加拼接）
+        for(var i=0,finalStr="";i<arr.length;i++){
+            finalStr+=String.fromCharCode(parseInt(arr[i]));
+        }
+        console.log(finalStr);
+    </script>
+</head>
+
+<body>
+
+</body>
+</html>

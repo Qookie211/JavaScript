@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <script>
+        /*  正则表达式：规定了字符串中出现的规则的表达式
+            查找、验证、替换、切割
+           规则：
+               1. 最简单的表达式，关键词原文 - 我草
+               2. 备选字符集：规定某一位字符的备选字符列表
+                             *必须且只能多选一*
+                  我草  我去  我X - 我([草去X]|[艹日]){1,2}  我去草
+
+                  2.1 如果备选字符集的unicode号是连续的
+                      可以用 - 连接开头和结尾的字符
+                      比如一位数字:[0123456789] --> [0-9]
+                          一位小写字母      -->     [a-z]
+                          一位字母         --》     [a-zA-Z]
+                          一位字母或数字   --》      [a-zA-Z0-9]
+               3. 预定义字符集：
+                  比如[0-9]    -->   \d   一位数字
+                   [a-zA-Z0-9_] -->   \w   一位英文数字或下划线
+                   空字符       --》   \s  一位空字符：换行，制表符（TAB一个缩进），空格
+                                       .  除了换行以外的所有字符！
+               4. 量词：规定字符集出现的次数
+                  默认一个量词，仅修饰左侧紧邻的字符集
+                  分类：2组
+                   4.1 确定数量：
+                       {m,n} -> 至少m个，最多n个
+                       {m,}  -> m个以上
+                       {m}   -> 必须是m个
+                   4.2 不确定数量：
+                       *   ->   可有可无，多了不限
+                       ?   ->   可有可无，最多一个
+                       +   ->   1个以上
+               5. 选择和分组：
+                  选择：|
+                  分组：()
+                  希望多个字符集被同一个量词修饰的时候
+                例如：手机号的正则表达式
+                      +86或0086  (\+86|0086)?  注意：+是正则的量词符号需要转译一下  \+
+                      中间空格    \s*
+                                 1[3-9]\d{9}
+               手机号的正则表达式： (\+86|0086)?\s*1[3-9]\d{9}
+
+              6. 指定匹配的位置：
+                 开头和结尾：^ - 开头的XXX，$ - 结尾的XXX
+                 仅匹配开头的规则和结尾的规则时使用
+                 固定搭配：^正则表达式$  --》表示从头到尾完整匹配
+                 在验证的时候必须前加^后加$
+                 比如匹配字符串开头的所有空字符：^\s+
+                     匹配字符串开头的所有空字符：\s+$
+
+         …………^
+         */
+
+        /*  字符串中支持正则表达式的API：
+                1. 查找 - str.search(reg)
+                   只找第一个匹配的，如果没有找到返回 -1
+                   没有第二个参数，无法修改查找的位置
+                   无法继续查找之后的所有关键词
+                   所以。这个API只能判断有没有
+        *
+        // * */
+        // var reply=prompt("请回复信息");
+        // var reg=/买[了个]{0,2}表/;
+        // if(reply.search(reg)!=-1){
+        //     alert("发现敏感词，请重新发言");
+        // }else{
+        //     alert("您是一个好人");
+        // }
+
+        /*     2. 匹配 - var kwords=str.match(reg)
+                 获得所有关键词的内容和个数
+                 如果reg结尾+i -》忽略大小写
+                 如果reg结尾+g,表示查找全部匹配关键词
+                 否则，默认仅查找第一个匹配的关键词
+                 ***如果没有找到。返回null
+                 返回的kwords一定要先判断，再使用
+                 if(kwords){
+                    console.log("共找到了"+kwords.length+"个")
+                 }else{
+                    console.log("没有找到！");
+                 }
+         */
+        // var str="haha hah go og og go";
+        // //       01234567
+        // var reg=/og/g;
+        // var kwords=str.match(reg);
+        // console.log(kwords);
+
+        /*     3. 替换 - str.replace(reg,"替换值")
+                  一般替换的操作都要加 g
+        * */
+        /*var str="\t Hello world \t";
+        function ltrim(){
+            return str.replace(/^\s+/,"");
+        }
+        console.log(ltrim());
+        function rtrim(){
+            return str.replace(/\s+$/,"");
+        }
+        console.log(rtrim());
+
+        //需求：替换开头或结尾的空白符的方法
+        function trim(){
+            return str.replace(/^\s+|\s+$/g,"");
+        }
+        console.log(trim());*/
+        //字符串中的trim() ，删除字符串中的前后的空白符
+        // console.log(str.trim());
+
+        /*  练习：
+            替换所有敏感词
+            纪检  纪检监察  纪委
+        *   纪[检委](监察)?
+        * */
+        var str="纪委负责全国党员干部的纪检和纪检监察工作";
+        var reg=/纪[检委](监察)?/;
+    //    反复使用str.match查找下一个关键词，直到返回null为止
+        var kwords=null;// 专门保存本次查找的关键词 kwords[0]
+        while((kwords=str.match(reg))!=null){
+            // match方法不加g，arr[0] --> 本次查找的关键词
+        //    每查找一次，就替换一次，替换的时候，同时判断关键词的字符个数
+        //          如果关键词是2个字 就替换成  **
+        //                          否则替换成 ****
+            str=str.replace(reg,kwords[0].length==2?"**":"****");
+        }
+        console.log(str);// **负责全国党员干部的**和****工作
+
+
+        /*  作业1：将str转为unicode号 加密
+        *   var str="今晚小树林w84u";
+        *   当转的unicode号不足5位时，通过添加 "0" 补齐5位进行字符串拼接输出
+        *   今  - 20123  w - 112 -->00112
+        *   输出结果：20123  00112 00034
+        *
+        *   作业2：把下面的内容，字母的首字母转为大写 进行输出
+        *   var str="no zuo no die";
+        *   结果：No Zuo No Die
+        * */
+
+    </script>
+</head>
+<body>
+    <script>
+        
+
+    </script>
+</body>
+</html>

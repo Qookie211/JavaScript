@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>倒计时</title>
+    <meta charset="utf-8"/>
+</head>
+<script>
+    /*  *****1. 定时器：
+            定时器：让程序按指定的时间间隔，自动执行***任务***
+            任务（回调函数）是所有定时器的核心
+            2种：
+             1. 周期性定时器：让浏览器按照指定的时间间隔反复执行同一任务
+                一项任务，连续执行
+                如何使用：3步
+                1. 定义任务函数
+                    function task(){}
+                2. 启动定时器：将任务函数放入到定时器的API中，设定一个时间间隔
+                    返回是定时器的**序号**
+                    timer = /!*window.*！/setInterval(task,ms);
+                    console.log(timer)// 数字
+                3. 停止定时器：只能通过*序号*停止
+                   clearInterval(timer);
+                   timer=null; // 节省内存操作
+    * */
+        function task(){
+            console.log("该起床了");
+        }
+        var timer=null;
+        timer=setInterval(task,1000);
+        clearInterval(timer);
+        timer=null;
+</script>
+<body>
+    <h1>距离放学还有<span id="timer"></span></h1>
+    <button onclick="stop(this)">停止倒计时</button>
+</body>
+</html>
+<script>
+    function calc(){// 计算当前时间距离目标时间的时间差
+        var now=new Date();// 获得当前时间对象
+        var target=new Date(now.toLocaleDateString()+" 23:00:00");// 定义目标时间
+        // console.log(target);
+        if(now<=target){
+            var ms=target-now;// 目标时间-当前时间得到时间差的毫秒数
+            // console.log(ms);
+            var s=ms/1000;
+        //    将秒数换算成时，分，秒，每个时间分量都是2位字符
+            var h=Math.floor(s/3600);
+            h<10&&(h="0"+h);
+            var m=Math.floor(s%3600/60);
+            m<10&&(m="0"+m);
+            s=Math.floor(s%3600%60);
+            s<10&&(s="0"+s);
+        //    拼接结果字符串：时：分：秒
+            document.getElementById("timer").innerHTML=h+":"+m+":"+s;
+        }else{// 如果到达目标时间，就停止定时器
+            document.getElementById("timer").innerHTML="00:00:00";
+            clearInterval(timer);
+            timer=null;
+        }
+    }
+    var timer=null;
+    window.onload=function(){
+        calc();
+        timer=setInterval(calc,1000);
+    }
+
+    function stop(btn){
+    //    timer存在的情况 1. 停止定时器  2. 启动定时器
+        if(timer){
+            console.log(timer);
+            clearInterval(timer);
+            timer=null;
+            btn.innerHTML="启动倒计时";
+        }else{
+            calc();
+            timer=setInterval(calc,1000);
+            btn.innerHTML="停止定时器";
+        }
+    }
+    /*  作业：
+            1. 预习一次性定时器
+            2. 总结什么是事件冒泡 （带案例）
+            3. 总结事件坐标、
+    *
+    * */
+</script>

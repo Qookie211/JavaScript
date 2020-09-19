@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8" />
+  <script>
+      /*  ***声明提前：程序正式开始执行之前，都会先将var声明的变量和function声明的函数
+              提前到当前作用域的顶部，集中声明，赋值留在本地！
+              函数的声明要比变量的声明更置顶
+      * */
+
+   function fun(){
+         return 1;
+      }
+      console.log(fun());
+      function fun(){
+         return 2;
+      }
+      console.log(fun());
+      var fun=100;
+      console.log(fun());//fun is not function(这里报错)
+
+      /*var n=100;
+      function fun(){
+        var n;
+        console.log(n);
+        n=99;
+        console.log(n);
+      }
+      fun();
+      console.log(n);*/
+
+  </script>
+ </head>
+
+ <body>
+  
+ </body>
+</html>
